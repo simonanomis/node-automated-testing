@@ -17,3 +17,11 @@ describe('absolute', () => {
     }); 
 });
 
+describe('greet', () => {
+    it('should return the greeting message', () => {
+        const result = lib.greet('Simona');
+        expect(result).toMatch(/Simona/);
+        expect(result).toContain('Simona');
+    });
+})
+
