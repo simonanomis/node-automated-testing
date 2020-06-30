@@ -23,7 +23,7 @@ describe('greet', () => {
         expect(result).toMatch(/Simona/);
         expect(result).toContain('Simona');
     });
-})
+});
 
 describe('getCurrencies', () => {
     it('should return supported currencies', () => {
@@ -47,6 +47,22 @@ describe('getCurrencies', () => {
         //ideal way
         expect(result).toEqual(expect.arrayContaining(['USD', 'EUR', 'AUD']));
 
+    });
+});
+
+describe('getProduct', () => {
+    it('should return product with given id', () => {
+        const result = lib.getProduct(1);
+        expect(result).toEqual({
+            id: 1,
+            price: 10
+        }); //equals and tests all properties of the objects
+        expect(result).toMatchObject({
+            id: 1,
+            price: 10
+        }); //tests only given properties
+        expect(result).toHaveProperty(
+            'id', 1);
     });
 })
 
