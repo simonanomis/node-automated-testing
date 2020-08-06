@@ -81,4 +81,15 @@ describe('registerUser', () => {
     });
 });
 
- 
+describe('applyDiscount', () => {
+    it('should apply 10% discount if customer has more than 10 points', () => {
+            lib.applyDiscount({ customerId: 1, totalPrice: 10 })
+        });
+    });
+
+    it('should return user object if valid username is passed', () => {
+        const result = lib.registerUser('Simona');
+        expect(result).toMatchObject({username: 'Simona'});
+        expect(result.id).toBeGreaterThan(0);
+    });
+});
