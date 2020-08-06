@@ -97,16 +97,15 @@ describe('applyDiscount', () => {
 
 describe('notifyCustomer', () => {
     it('should send email to the customer', () => {
-        db.getCustomerSync = function(customerId) {
-            console.log('Fake notify customer...');
-            return {email: 'a'}
-        }
 
-        let mailSent = false;
-        mail.send = function(email, message) {
-            mailSent = true;
-        }
+        db.getCustomerSync = jest.fn().mockReturnValue( {email: 'a'});
+        mail.send = jest.fn()
+        
         lib.notifyCustomer( {customerId: 1 });
-        expect(mailSent).toBe(true);
+        //expect(mail.send).toHaveBeenCalled();
+        expect(mail.send).toHaveBeenCalled();
+        expect(mail.send.mock.calls[0][0]).toBe('a'); //check passing arguments like mail
+        expect(mail.send.mock.calls[0][1]).toMatch(/order/); //and message where order is in the sentence
+
     });
 });
